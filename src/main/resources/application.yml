@@ -6,9 +6,12 @@ server:
     threads:
       max: 50
       min-spare: 5
+  shutdown: graceful # graceful shutdown
 spring:
   application:
     name: configuration-service
+  lifecycle:
+    timeout-per-shutdown-phase: 15s # grace period of 15s
   cloud:
     config:
       server:

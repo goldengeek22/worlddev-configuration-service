@@ -19,6 +19,7 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-config-server'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -27,6 +28,19 @@ dependencyManagement {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
+
+bootBuildImage{
+	imageName = "worlddev-".concat(project.name)
+	environment = ["BP_JVM_VERSION":"17.*"]
+	docker {
+		publishRegistry{
+			username = project.findProperty("registryUsername")
+			password = project.findProperty("registryToken")
+			url = project.findProperty("registryUrl")
+		}
+	}
+}
+
 
 tasks.named('test') {
 	useJUnitPlatform()

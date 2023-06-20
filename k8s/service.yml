@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: worlddev-configuration-service
+  labels:
+    app: worlddev-configuration-service
+spec:
+  type: ClusterIP
+  selector:
+    app: worlddev-configuration-service
+  ports:
+    - protocol: TCP
+      port: 7000
+      targetPort: 7000
